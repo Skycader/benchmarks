@@ -34,22 +34,14 @@ function getRandomFlight() {
 }
 
 const array = [];
-for (let i = 0; i <= 10000; i++) {
+for (let i = 0; i <= 1000000; i++) {
   array.push(getRandomFlight());
 }
 
 const start = Date.now();
 
-const departMillisecondsMin = array.reduce((prev, curr) => {
-  const p = prev;
-  const c = curr;
+const departMillisecondsMin = array
+  .map((flight) => flight.planDepartDateMs)
+  .reduce((prev, curr) => (prev < curr ? prev : curr));
 
-  if (c.planDepartDateMs && p.planDepartDateMs)
-    return p.planDepartDateMs < c.planDepartDateMs ? p : c;
-  return p;
-});
-
-const minDeparture = departMillisecondsMin;
-const minMs = minDeparture.planDepartDateMs || 0;
-
-console.log("DONE", Date.now() - start, "RESULT: ", minMs);
+console.log("DONE", Date.now() - start, "RESULT: ", departMillisecondsMin);

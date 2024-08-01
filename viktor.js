@@ -34,7 +34,7 @@ function getRandomFlight() {
 }
 
 const array = [];
-for (let i = 0; i <= 1000000; i++) {
+for (let i = 0; i <= 10000; i++) {
   array.push(getRandomFlight());
 }
 
@@ -43,4 +43,4 @@ const start = Date.now();
 const flightDeparts = array.map((flight) => flight.planDepartDateMs);
 const departMillisecondsMin = Math.min(...flightDeparts);
 
-console.log("DONE", Date.now() - start, "RESULT: ", minMs);
+console.log("DONE", Date.now() - start, "RESULT: ", departMillisecondsMin);

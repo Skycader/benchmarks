@@ -1,3 +1,5 @@
+const _ = require("lodash");
+
 let s1 = [
   "fregrew",
   "kuitkyu",
@@ -34,22 +36,18 @@ function getRandomFlight() {
 }
 
 const array = [];
-for (let i = 0; i <= 10000; i++) {
+for (let i = 0; i <= 1000000; i++) {
   array.push(getRandomFlight());
 }
 
 const start = Date.now();
 
-const departMillisecondsMin = array.reduce((prev, curr) => {
-  const p = prev;
-  const c = curr;
+const min = _.minBy(array, "planDepartDateMs");
+//
 
-  if (c.planDepartDateMs && p.planDepartDateMs)
-    return p.planDepartDateMs < c.planDepartDateMs ? p : c;
-  return p;
-});
-
-const minDeparture = departMillisecondsMin;
-const minMs = minDeparture.planDepartDateMs || 0;
-
-console.log("DONE", Date.now() - start, "RESULT: ", minMs);
+// const result = _(array)
+//   .groupBy("planDepartDateMs")
+//   .map((departDateMs) => _.minBy(departDateMs, "departDateMs"))
+//   .value();
+//
+console.log("DONE", Date.now() - start, "RESULT: ", min);
